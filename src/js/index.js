@@ -1,6 +1,7 @@
 (function (document) {
 	var isBusy = false
 	var prevDirection = 's'
+	var isKeyPressed = false
 
 	var b = 'button'
 	var c = 'click'
@@ -27,12 +28,9 @@
 		$.ajax({
 			url: direction,
 			complete: function () {
-				setTimeout(function () {
-					isBusy = false
+				isBusy = false
 
-					cbComplete()
-				}, 1000)
-				// isBusy = false
+				cbComplete()
 			}
 		})
 	}
@@ -54,11 +52,13 @@
 	$(document).keydown(function (e) {
 		var d = keyMap[e.key]
 
-		if (!isBusy && prevDirection !== d) {
+		if (!isKeyPressed && !isBusy) {
 			prevDirection = d
 
 			r(d, function () {
 				$(b + '[d="' + d + '"]').addClass('a')
+
+				isKeyPressed = true
 			})
 		}
 	})
@@ -68,6 +68,8 @@
 			$(b + '[d="' + prevDirection + '"]').removeClass('a')
 		}, function () {
 			prevDirection = 's'
+
+			isKeyPressed = false
 		})
 	})
 })(document)
