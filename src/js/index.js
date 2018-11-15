@@ -3,7 +3,7 @@
 	var prevDirection = 's'
 	var isKeyPressed = false
 
-	var b = 'button'
+	var b = '[d]'
 	var c = 'click'
 	var keyMap = {
 		'ArrowUp': 'f',
